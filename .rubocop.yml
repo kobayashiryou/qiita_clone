@@ -1,0 +1,10 @@
+require: rubocop-rails
+require: rubocop-rspec
+
+require:
+  - rubocop-other-extension
+  - rubocop-rails
+
+require:
+  - rubocop-other-extension
+  - rubocop-rspec
