@@ -3,7 +3,7 @@ version: '3.2'
 services:
   database:
     restart: always
-    image: mariadb
+    image: mysql:5.7.32
     ports:
       - 3306:3306
     command: --default-authentication-plugin=mysql_native_password
