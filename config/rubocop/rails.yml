@@ -1,0 +1,102 @@
+Rails:
+  Enabled: true
+
+# ActiveRecord で association を安易に delegate すると
+# N+1 を起こしまくるので、なるべく delegate 的なメソッドを使わずに
+# コストが掛かっていることを自覚できるようにしておきたい。
+# メソッドでも危ういが、DSL だと更に意識から抜けるので無効に。
+Rails/Delegate:
+  Enabled: false
+
+# 意図せずに exit を書くこと無いでしょ？
+# 毎回 Exclude / rubocop:disable する方が手間。
+Rails/Exit:
+  Enabled: false
+
+# -File.join(Rails.root, "app", "models")
+# +Rails.root.join("app", "models")
+# はともかく
+# -Rails.root.join("app/models")
+# +Rails.root.join("app", "models")
+# は Pathname#plus が行っているので意味無いのでは？
+Rails/FilePath:
+  Enabled: false
+
+# 桁が揃わなくて気持ち悪い
+#   create(:user, logged_in_at: 1.day.ago)
+#   create(:user, logged_in_at: 2.days.ago)
+Rails/PluralizationGrammar:
+  Enabled: false
+
+# unless 文を使ってでも「空」を条件にした方が
+# 「存在する」よりも「空」の方が状態として特別なので
+# 脳内モデルと合致しやすい。
+Rails/Present:
+  Enabled: false
+
+# method_missing を隠したい場合は respond_to? を使うべき
+Rails/SafeNavigation:
+  ConvertTry: true
+
+# valid? チェックし忘れを防ぎたい
+Rails/SaveBang:
+  Enabled: true
+
+# staging 環境を使っているので追加
+Rails/UnknownEnv:
+  Environments:
+    - development # rubocop default.yml
+    - test        # rubocop default.yml
+    - production  # rubocop default.yml
+    - staging
+
+Rails/ActiveRecordCallbacksOrder: # (new in 2.7)
+  Enabled: true
+
+Rails/AfterCommitOverride: # (new in 2.8)
+  Enabled: true
+
+Rails/AttributeDefaultBlockValue: # (new in 2.9)
+  Enabled: true
+
+Rails/FindById: # (new in 2.7)
+  Enabled: true
+
+Rails/Inquiry: # (new in 2.7)
+  Enabled: true
+
+Rails/MailerName: # (new in 2.7)
+  Enabled: true
+
+Rails/MatchRoute: # (new in 2.7)
+  Enabled: true
+
+Rails/NegateInclude: # (new in 2.7)
+  Enabled: true
+
+Rails/Pluck: # (new in 2.7)
+  Enabled: true
+
+Rails/PluckInWhere: # (new in 2.7)
+  Enabled: true
+
+Rails/RenderInline: # (new in 2.7)
+  Enabled: true
+
+Rails/RenderPlainText: # (new in 2.7)
+  Enabled: true
+
+Rails/ShortI18n: # (new in 2.7)
+  Enabled: true
+
+Rails/SquishedSQLHeredocs: # (new in 2.8)
+  Enabled: true
+
+Rails/WhereEquals: # (new in 2.9)
+  Enabled: true
+
+Rails/WhereExists: # (new in 2.7)
+  Enabled: true
+
+Rails/WhereNot: # (new in 2.8)
+  Enabled: true
