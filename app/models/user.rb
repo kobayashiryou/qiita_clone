@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
-  has_many:articles
-  has_many:likes
-  has_many:comments
+  has_many:articles, dependent: :destroy
+  has_many:likes, dependent: :destroy
+  has_many:comments, dependent: :destroy
 end
