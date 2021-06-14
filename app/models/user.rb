@@ -10,6 +10,5 @@ class User < ActiveRecord::Base
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
   validates :nickname, uniqueness: true
-  validates :email, :nickname, :password, presence: true
-  validates :password, length: { in: 8..32 }
+  validates :nickname, presence: true
 end
