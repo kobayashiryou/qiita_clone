@@ -1,10 +1,11 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Article, type: :model do
   context "title,bodyが指定されている時" do
     before do
       @user = create(:user)
     end
+
     it "記事が作成される" do
       article = build(:article, user_id: @user.id)
       expect(article).to be_valid
@@ -15,6 +16,7 @@ RSpec.describe Article, type: :model do
     before do
       @user = create(:user)
     end
+
     it "titleが指定されていない時にエラーする" do
       article = build(:article, user_id: @user.id, title: nil)
       article.valid?

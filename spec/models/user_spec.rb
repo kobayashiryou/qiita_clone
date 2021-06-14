@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe User, type: :model do
   context "nickname,email,passwordを指定している時" do
@@ -10,7 +10,7 @@ RSpec.describe User, type: :model do
 
   context "nicknameを指定していない時" do
     it "エラーする" do
-      user = build(:user,nickname: nil)
+      user = build(:user, nickname: nil)
       user.valid?
       expect(user.errors.messages[:nickname]).to include "can't be blank"
     end
@@ -56,5 +56,4 @@ RSpec.describe User, type: :model do
       expect(user.errors.messages[:password]).to include "is too short (minimum is 8 characters)"
     end
   end
-
 end
