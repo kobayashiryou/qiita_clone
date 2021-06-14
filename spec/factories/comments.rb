@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :comment do
-    content { Faker::String }
+    content { Faker::Lorem.sentence }
   end
 end
