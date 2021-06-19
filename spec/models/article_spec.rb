@@ -2,27 +2,28 @@ require "rails_helper"
 
 RSpec.describe Article, type: :model do
   context "validation check" do
+    let!(:user){ create(:user) }
+    let(:article){ build( :article, user: user, title: title, body: body) }
+    let(:title){ Faker::Lorem.sentence }
+    let(:body){ Faker::Lorem.sentences }
+    subject{ article.valid? }
     context "title,bodyが指定されている時" do
-      let!(:user){ create(:user) }
-
-      it "記事が作成される" do
-        article = build(:article, user_id: user.id)
-        expect(article).to be_valid
+      it "記事がエラーすることなく作成される" do
+        expect(subject).to eq true
       end
     end
 
-    context "title,bodyが指定されていない時" do
-      let!(:user){ create(:user)}
-
-      it "titleが指定されていない時にエラーする" do
-        article = build(:article, user_id: user.id, title: nil)
-        article.valid?
+    context "titleが指定されていない時" do
+      let(:title){ nil }
+      it "エラーする" do
+        subject
         expect(article.errors.messages[:title]).to include "can't be blank"
       end
-
-      it "bodyが指定されていない時にエラーする" do
-        article = build(:article, user_id: user.id, body: nil)
-        article.valid?
+    end
+    context "bodyが指定されていない時" do
+      let(:body){ nil }
+      it "エラーする" do
+        subject
         expect(article.errors.messages[:body]).to include "can't be blank"
       end
     end
