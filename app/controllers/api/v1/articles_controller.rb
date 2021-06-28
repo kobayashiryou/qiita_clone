@@ -1,10 +1,11 @@
-class ArticlesController < ApplicationController
+class Api::V1::ArticlesController < Api::V1::ApiController
   before_action :set_article, only: %i[show update destroy]
 
   # GET /articles
   # GET /articles.json
   def index
     @articles = Article.all
+    render json: @articles, each_serializer: ArticleSerializer
   end
 
   # GET /articles/1
