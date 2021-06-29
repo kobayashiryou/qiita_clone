@@ -12,7 +12,7 @@ class Api::V1::ArticlesController < Api::V1::ApiController
   # GET api/v1/articles/1.json
   def show
     article = Article.find(params[:id])
-    render json: article, each_serializer: ArticleSerializer
+    render json: article, serializer: ArticleSerializer
   end
 
   # POST /articles
