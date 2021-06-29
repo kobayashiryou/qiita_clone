@@ -1,16 +1,17 @@
 class Api::V1::ArticlesController < Api::V1::ApiController
   before_action :set_article, only: %i[show update destroy]
 
-  # GET /articles
-  # GET /articles.json
+  # GET api/v1/articles
+  # GET api/v1/articles.json
   def index
     articles = Article.all
     render json: articles, each_serializer: ArticleSerializer
   end
 
-  # GET /articles/1
-  # GET /articles/1.json
+  # GET api/v1/articles/1
+  # GET api/v1/articles/1.json
   def show
+    render json: @article, serializer: ArticleSerializer
   end
 
   # POST /articles
