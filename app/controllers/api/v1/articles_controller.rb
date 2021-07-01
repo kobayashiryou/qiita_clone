@@ -25,7 +25,7 @@ class Api::V1::ArticlesController < Api::V1::ApiController
   # PATCH/PUT api/v1/articles/1.json
   def update
     article = current_user.articles.find(params[:id])
-    article.update(article_params)
+    article.update!(article_params)
     render json: article
   end
 
