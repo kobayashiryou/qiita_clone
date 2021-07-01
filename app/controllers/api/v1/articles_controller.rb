@@ -14,16 +14,11 @@ class Api::V1::ArticlesController < Api::V1::ApiController
     render json: @article, serializer: ArticleSerializer
   end
 
-  # POST /articles
-  # POST /articles.json
+  # POST api/v1/articles
+  # POST api/v1/articles.json
   def create
-    @article = Article.new(article_params)
-
-    if @article.save
-      render :show, status: :created, location: @article
-    else
-      render json: @article.errors, status: :unprocessable_entity
-    end
+    article = current_user.articles.create!(article_params)
+    render json: article
   end
 
   # PATCH/PUT /articles/1
