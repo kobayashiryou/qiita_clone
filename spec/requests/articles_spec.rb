@@ -59,24 +59,25 @@ RSpec.describe "Articles", type: :request do
     end
   end
 
-  describe "PATCH api/v1/articles/:id"do
-  subject { patch(api_v1_article_path(article_id), params:params)}
-  before do
-    allow_any_instance_of(Api::V1::ApiController).to receive(:current_user).and_return(current_user)
-  end
+  describe "PATCH api/v1/articles/:id" do
+    subject { patch(api_v1_article_path(article_id), params: params) }
 
-  let!(:current_user){ create(:user) }
-  let(:article){ create(:article, user: current_user) }
-  let(:article_id){ article.id }
-  let(:params){ {article: {title: Faker::Lorem.sentence, created_at: Time.current } } }
+    before do
+      allow_any_instance_of(Api::V1::ApiController).to receive(:current_user).and_return(current_user)
+    end
+
+    let!(:current_user) { create(:user) }
+    let(:article) { create(:article, user: current_user) }
+    let(:article_id) { article.id }
+    let(:params) { { article: { title: Faker::Lorem.sentence, created_at: Time.current } } }
 
     context "current_userが指定した記事を編集した時" do
       it "記事は編集される" do
-        expect { subject }.to change { Article.find(article_id).title }.from( article.title ).to( params[:article][:title] ) &
+        expect { subject }.to change { Article.find(article_id).title }.from(article.title).to(params[:article][:title]) &
                               not_change { Article.find(article_id).body } &
                               not_change { Article.find(article_id).user_id } &
                               not_change { Article.find(article_id).created_at }
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
   end
