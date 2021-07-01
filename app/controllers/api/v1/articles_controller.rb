@@ -1,5 +1,5 @@
 class Api::V1::ArticlesController < Api::V1::ApiController
-  before_action :set_article, only: %i[show update destroy]
+  before_action :set_article, only: %i[show destroy]
 
   # GET api/v1/articles
   # GET api/v1/articles.json
@@ -21,14 +21,12 @@ class Api::V1::ArticlesController < Api::V1::ApiController
     render json: article
   end
 
-  # PATCH/PUT /articles/1
-  # PATCH/PUT /articles/1.json
+  # PATCH/PUT api/v1/articles/1
+  # PATCH/PUT api/v1/articles/1.json
   def update
-    if @article.update(article_params)
-      render :show, status: :ok, location: @article
-    else
-      render json: @article.errors, status: :unprocessable_entity
-    end
+    article = current_user.articles.find(params[:id])
+    article.update!(article_params)
+    render json: article
   end
 
   # DELETE /articles/1
