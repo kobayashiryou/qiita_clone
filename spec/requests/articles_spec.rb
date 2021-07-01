@@ -82,10 +82,36 @@ RSpec.describe "Articles", type: :request do
     end
 
     context "current_userが他の記事を編集した時" do
-      let(:article){ create(:article) }
+      let(:article) { create(:article) }
       it "エラーする" do
-        expect{ subject }.to raise_error ActiveRecord::RecordNotFound
+        expect { subject }.to raise_error ActiveRecord::RecordNotFound
+      end
+    end
+  end
 
+  describe "DELETE api/v1/articles/:id" do
+    subject { delete(api_v1_article_path(article_id)) }
+
+    before do
+      allow_any_instance_of(Api::V1::ApiController).to receive(:current_user).and_return(current_user)
+    end
+
+    let!(:current_user) { create(:user) }
+    let!(:article) { create(:article, user: current_user) }
+    let!(:article_id) { article.id }
+
+    context "current_userが指定した記事を削除した時" do
+      it "記事は削除される" do
+        expect { subject }.to change { current_user.articles.count }.by(-1)
+        expect(response).to have_http_status(:no_content)
+      end
+    end
+
+    context "current_userが他の記事を削除しようとする時" do
+      let(:article) { create(:article) }
+      let(:article_id) { article.id }
+      it "エラーする" do
+        expect { subject }.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end
