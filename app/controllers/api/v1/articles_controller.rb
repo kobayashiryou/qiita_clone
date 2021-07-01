@@ -1,5 +1,5 @@
 class Api::V1::ArticlesController < Api::V1::ApiController
-  before_action :set_article, only: %i[show update destroy]
+  before_action :set_article, only: %i[show destroy]
 
   # GET api/v1/articles
   # GET api/v1/articles.json
