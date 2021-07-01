@@ -1,5 +1,5 @@
 class Api::V1::ArticlesController < Api::V1::ApiController
-  before_action :set_article, only: %i[show destroy]
+  before_action :set_article, only: [:show]
 
   # GET api/v1/articles
   # GET api/v1/articles.json
@@ -29,10 +29,11 @@ class Api::V1::ArticlesController < Api::V1::ApiController
     render json: article
   end
 
-  # DELETE /articles/1
-  # DELETE /articles/1.json
+  # DELETE api/v1/articles/1
+  # DELETE api/v1/articles/1.json
   def destroy
-    @article.destroy
+    article = current_user.articles.find(params[:id])
+    article.destroy!
   end
 
   private
