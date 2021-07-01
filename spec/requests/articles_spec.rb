@@ -80,5 +80,13 @@ RSpec.describe "Articles", type: :request do
         expect(response).to have_http_status(:ok)
       end
     end
+
+    context "current_userが他の記事を編集した時" do
+      let(:article){ create(:article) }
+      it "エラーする" do
+        expect{ subject }.to raise_error ActiveRecord::RecordNotFound
+
+      end
+    end
   end
 end
