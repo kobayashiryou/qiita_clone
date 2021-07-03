@@ -7,6 +7,8 @@ gem "devise_token_auth"
 
 gem "active_model_serializers", "~> 0.10.0"
 
+gem "rack-cors"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 5.2.3"
 # Use mysql as the database for Active Record
