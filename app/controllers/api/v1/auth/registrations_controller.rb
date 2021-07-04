@@ -1,8 +1,6 @@
-class Api::V1::Auth::RegistrationsController < Api::V1::ApiController
-  def create
-    user = User.new
-    render json: {
-      data: user
-    }
+class Api::V1::Auth::RegistrationsController < DeviseTokenAuth::RegistrationsController
+  private
+  def sign_up_params
+    params.permit(:nickname, :email, :password)
   end
 end
