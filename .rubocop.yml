@@ -9,5 +9,3 @@ inherit_from:
 AllCops:
   TargetRubyVersion: 2.6
   Enabled: true
-  Exclude:
-    - 'config/initializers/devise_token_auth.rb'
