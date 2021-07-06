@@ -1,5 +1,6 @@
 class Api::V1::ArticlesController < Api::V1::ApiController
   before_action :set_article, only: [:show]
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
 
   # GET api/v1/articles
   # GET api/v1/articles.json
