@@ -42,8 +42,9 @@ RSpec.describe "Articles", type: :request do
   end
 
   describe "POST api/v1/articles" do
-    subject { post(api_v1_articles_path, params: params) }
+    subject { post(api_v1_articles_path, params: params, headers: headers) }
 
+    let(:headers) { current_user.create_new_auth_token }
     let(:current_user) { create(:user) }
     let(:params) { { article: attributes_for(:article) } }
 
@@ -60,13 +61,14 @@ RSpec.describe "Articles", type: :request do
   end
 
   describe "PATCH api/v1/articles/:id" do
-    subject { patch(api_v1_article_path(article_id), params: params) }
+    subject { patch(api_v1_article_path(article_id), params: params, headers: headers) }
 
     before do
       allow_any_instance_of(Api::V1::ApiController).to receive(:current_user).and_return(current_user)
     end
 
     let!(:current_user) { create(:user) }
+    let(:headers) { current_user.create_new_auth_token }
     let(:article) { create(:article, user: current_user) }
     let(:article_id) { article.id }
     let(:params) { { article: { title: Faker::Lorem.sentence, created_at: Time.current } } }
@@ -90,13 +92,14 @@ RSpec.describe "Articles", type: :request do
   end
 
   describe "DELETE api/v1/articles/:id" do
-    subject { delete(api_v1_article_path(article_id)) }
+    subject { delete(api_v1_article_path(article_id), headers: headers) }
 
     before do
       allow_any_instance_of(Api::V1::ApiController).to receive(:current_user).and_return(current_user)
     end
 
     let!(:current_user) { create(:user) }
+    let!(:headers) { current_user.create_new_auth_token }
     let!(:article) { create(:article, user: current_user) }
     let!(:article_id) { article.id }
 
