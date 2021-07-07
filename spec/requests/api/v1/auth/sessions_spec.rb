@@ -70,10 +70,6 @@ RSpec.describe "Sessions", type: :request do
   describe "DELETE api/v1/auth/sign_out" do
     subject { delete(destroy_api_v1_user_session_path, headers: headers) }
 
-    before do
-      allow_any_instance_of(Api::V1::ApiController).to receive(:current_user).and_return(current_user)
-    end
-
     let(:current_user) { create(:user) }
     let(:headers) { current_user.create_new_auth_token }
     context "ログインユーザーがログアウトした時" do
