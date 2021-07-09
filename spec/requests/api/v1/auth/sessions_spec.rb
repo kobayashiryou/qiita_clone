@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Sessions", type: :request do
   describe "POST api/v1/auth/sign_in" do
-    subject { post(api_v1_user_session_path, params: params, headers: { "CONTENT_TYPE" => "application/json" }) }
+    subject { post(api_v1_user_session_path, params: params) }
 
     let(:user) { create(:user) }
     let(:params) {
@@ -10,7 +10,7 @@ RSpec.describe "Sessions", type: :request do
         email: user.email,
         nickname: user.nickname,
         password: user.password,
-      }.to_json
+      }
     }
     context "登録済みユーザーの必要情報が入力されている時" do
       it "ログインする" do
@@ -25,7 +25,7 @@ RSpec.describe "Sessions", type: :request do
       let(:params) {
         {
           email: Faker::Internet.email,
-        }.to_json
+        }
       }
       it "ログインできない" do
         subject
@@ -40,7 +40,7 @@ RSpec.describe "Sessions", type: :request do
       let(:params) {
         {
           nickname: Faker::Internet.username,
-        }.to_json
+        }
       }
       it "ログインできない" do
         subject
@@ -55,7 +55,7 @@ RSpec.describe "Sessions", type: :request do
       let(:params) {
         {
           password: Faker::Internet.password(min_length: 6),
-        }.to_json
+        }
       }
       it "ログインできない" do
         subject
