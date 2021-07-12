@@ -9,5 +9,5 @@ class User < ActiveRecord::Base
   has_many :articles, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
-  validates :nickname, uniqueness: {case_sensitive: true}, presence: true
+  validates :nickname, uniqueness: { case_sensitive: true }, presence: true
 end
