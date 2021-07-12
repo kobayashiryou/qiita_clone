@@ -3,7 +3,7 @@ git_source(:github) {|repo| "https://github.com/#{repo}.git" }
 
 ruby "2.7.2"
 
-gem 'devise', '4.7.3'
+gem "devise", "4.7.3"
 
 gem "devise_token_auth"
 
@@ -43,7 +43,6 @@ gem "turbolinks", "~> 5"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.1.0", require: false
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
