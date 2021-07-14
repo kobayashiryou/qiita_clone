@@ -5,11 +5,12 @@ RSpec.describe Article, type: :model do
     subject { article.valid? }
 
     let!(:user) { create(:user) }
-    let(:article) { build(:article, user: user, title: title, body: body) }
+    let(:article) { build(:article, user: user, title: title, body: body, status: status) }
     let(:title) { Faker::Lorem.sentence }
     let(:body) { Faker::Lorem.sentences }
+    let(:status) { :published }
 
-    context "title,bodyが指定されている時" do
+    context "title,body,statusが指定されている時" do
       it "記事がエラーすることなく作成される" do
         expect(subject).to eq true
       end
@@ -28,6 +29,14 @@ RSpec.describe Article, type: :model do
       it "エラーする" do
         subject
         expect(article.errors.messages[:body]).to include "can't be blank"
+      end
+    end
+
+    context "statusが指定されていない時" do
+      let(:status) { nil }
+      it "エラーする" do
+        subject
+        expect(article.errors.messages[:status]).to include "can't be blank"
       end
     end
   end
