@@ -6,7 +6,8 @@ class Api::V1::ArticlesController < Api::V1::ApiController
   # GET api/v1/articles.json
   def index
     articles = Article.all
-    render json: articles, each_serializer: ArticleSerializer
+    article_p = articles.select{|article| article.status == "published" }
+    render json: article_p, each_serializer: ArticleSerializer
   end
 
   # GET api/v1/articles/1
@@ -46,6 +47,6 @@ class Api::V1::ArticlesController < Api::V1::ApiController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.require(:article).permit(:title, :body)
+      params.require(:article).permit(:title, :body, :status)
     end
 end
