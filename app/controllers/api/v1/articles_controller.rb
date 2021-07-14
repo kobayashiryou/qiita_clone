@@ -5,7 +5,7 @@ class Api::V1::ArticlesController < Api::V1::ApiController
   # GET api/v1/articles
   # GET api/v1/articles.json
   def index
-    articles = Article.where(status: :published)
+    articles = Article.published
     render json: articles, each_serializer: ArticleSerializer
   end
 
