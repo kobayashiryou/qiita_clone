@@ -6,7 +6,7 @@ class Api::V1::ArticlesController < Api::V1::ApiController
   # GET api/v1/articles.json
   def index
     articles = Article.all
-    article_p = articles.select{|article| article.status == "published" }
+    article_p = articles.select {|article| article.status == "published" }
     render json: article_p, each_serializer: ArticleSerializer
   end
 

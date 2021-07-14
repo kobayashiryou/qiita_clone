@@ -42,15 +42,16 @@ RSpec.describe Article, type: :model do
   end
 
   describe "下書き機能の確認" do
-    let(:article){ create(:article, status: status) }
-    let(:status){ :published }
+    let(:article) { create(:article, status: status) }
+    let(:status) { :published }
     context "statusがpulishedの時" do
       it "公開記事だけ取得できる" do
         expect(article.status).to include "published"
       end
     end
+
     context "statusがdraftの時" do
-      let(:status){ :draft }
+      let(:status) { :draft }
       it "下書き記事だけ取得できる" do
         expect(article.status).to include "draft"
       end
