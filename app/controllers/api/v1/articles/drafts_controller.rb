@@ -3,9 +3,8 @@ class Api::V1::Articles::DraftsController < Api::V1::ApiController
   before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    articles = Article.draft
-    article = current_user.articles
-    render json: article, each_serializer: ArticleSerializer
+    articles = current_user.articles.draft
+    render json: articles, each_serializer: ArticleSerializer
   end
 
   def show
