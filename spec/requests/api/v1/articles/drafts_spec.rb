@@ -8,15 +8,14 @@ RSpec.describe "Drafts", type: :request do
     let(:headers) { current_user.create_new_auth_token }
     before do
       create_list(:article, 3, status: :draft, user: current_user)
-      create_list(:article, 3, status: :published, user: current_user)
+      create_list(:article, 2, status: :published, user: current_user)
     end
 
     context "statusがdraftの時" do
       it "下書き記事一覧が表示される" do
         subject
         res = JSON.parse(response.body)
-        draft = res.select{|re| re["status"] == "draft" }
-        expect(draft.length).to eq 3
+        expect(res.length).to eq current_user.articles.draft.length
         expect(response).to have_http_status(:ok)
       end
     end
