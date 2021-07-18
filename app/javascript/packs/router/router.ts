@@ -1,3 +1,4 @@
+
 import Vue from "vue/dist/vue.esm.js";
 import VueRouter from "vue-router";
 import ArticlesContainer from "../container/ArticlesContainer.vue";
@@ -15,6 +16,7 @@ export default new VueRouter({
     { path: "/sign_up", component: RegisterContainer },
     { path: "/sign_in", component: LoginContainer },
     { path: "/articles/new", component: EditArticleContainer },
+    { path: "/articles/:id/edit", component: EditArticleContainer },
     { path: "/articles/:id", component: ArticleContainer, name: "article" }
   ]
 });
