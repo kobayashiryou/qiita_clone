@@ -5,5 +5,4 @@ class Api::V1::Current::ArticlesController < Api::V1::ApiController
     articles = current_user.articles.published
     render json: articles
   end
-
 end
