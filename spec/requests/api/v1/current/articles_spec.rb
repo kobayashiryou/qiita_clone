@@ -10,7 +10,7 @@ RSpec.describe "Mypage", type: :request do
     before do
       create_list(:article, 3, user: current_user)
       create_list(:article, 2, user: current_user, status: :draft)
-      create_list(:article, 3, user: user)
+      create_list(:article, 2, user: user)
     end
 
     context "current_userがmypageに接続した時" do
@@ -18,9 +18,7 @@ RSpec.describe "Mypage", type: :request do
         subject
         res = JSON.parse(response.body)
         expect(res.length).to eq current_user.articles.published.length
-        expect(res[0].values).to include "published"
-        expect(res).to not_include current_user.articles.draft
-        expect(res).to not_include user.articles
+        expect(res[0].keys).to eq ["id", "title", "body", "status","updated_at", "user"]
         expect(response).to have_http_status(:ok)
       end
     end
