@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get "sign_in", to: "homes#index"
   get "articles/new", to: "homes#index"
   get "articles/:id/edit", to: "homes#index"
+  get "articles/:id", to: "homes#index"
+  get "articles/mypage", to: "homes#index"
+
 
   namespace :api, format: "json" do
     namespace :v1 do
