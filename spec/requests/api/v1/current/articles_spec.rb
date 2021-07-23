@@ -18,7 +18,7 @@ RSpec.describe "Mypage", type: :request do
         subject
         res = JSON.parse(response.body)
         expect(res.length).to eq current_user.articles.published.length
-        expect(res[0].keys).to eq ["id", "title", "body", "status","updated_at", "user"]
+        expect(res[0].keys).to eq ["id", "title", "created_at", "user"]
         expect(response).to have_http_status(:ok)
       end
     end
